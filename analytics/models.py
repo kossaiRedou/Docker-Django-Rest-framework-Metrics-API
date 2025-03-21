@@ -24,3 +24,4 @@ class SalesData(models.Model):
         plt.ylabel("Total des ventes")
         plt.title("Tendance des ventes")
         plt.savefig(f"media/{self.name}_sales_trend.png")
+        

@@ -27,3 +27,10 @@ def top_products(request, dataset_id):
     dataset = SalesData.objects.get(id=dataset_id)
     top_products = dataset.get_top_products()
     return Response(top_products)
+
+
+@api_view(['GET'])
+def generate_sales_trend(request, dataset_id):
+    dataset = SalesData.objects.get(id=dataset_id)
+    dataset.plot_sales_trends()
+    return Response({"message": "Graphique généré", "image": f"media/{dataset.name}_sales_trend.png"})
