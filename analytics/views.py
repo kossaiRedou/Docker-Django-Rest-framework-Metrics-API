@@ -11,9 +11,16 @@ def list_datasets(request):
 
 @api_view(['POST'])
 def upload_dataset(request):
+    print(request.FILES)  # 🔍 Debug : Voir si le fichier est bien reçu
+    
     file = request.FILES.get('file')
+    
+    if not file:
+        return Response({"error": "Aucun fichier reçu. Vérifiez que vous envoyez bien un fichier avec form-data."}, status=400)
+
     dataset = SalesData.objects.create(name=file.name, file=file)
     return Response({"message": "Dataset uploaded successfully"})
+
 
 @api_view(['GET'])
 def top_products(request, dataset_id):
